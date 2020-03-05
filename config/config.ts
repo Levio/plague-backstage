@@ -27,7 +27,7 @@ const config: IConfig = {
         antd: true,
         dva: true,
         dynamicImport: false,
-        title: '疫镜后台管理平台',
+        title: 'BACKSTAGE',
         dll: false,
 
         routes: {
