@@ -1,6 +1,7 @@
 import { IConfig } from 'umi-types';
 import routes from './router.config';
 import proxy from './proxy.config';
+import webpackPlugin from './plugin.config';
 
 // ref: https://umijs.org/config/
 const config: IConfig = {
@@ -19,6 +20,7 @@ const config: IConfig = {
     basePath: '/',
   },
   proxy,
+  chainWebpack: webpackPlugin,
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     [
