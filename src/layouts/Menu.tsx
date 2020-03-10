@@ -4,7 +4,7 @@ import MENUCONFIG, { MenuState } from '@/config/menu';
 
 const { SubMenu } = Menu;
 
-const LayoutMenu: React.FC = props => {
+const BasicMenu: React.FC = props => {
   const resolveMenu = (menu: MenuState[]): ReactNode => {
     return menu.map(item => {
       if (item.children && item.children.length) {
@@ -39,4 +39,4 @@ const LayoutMenu: React.FC = props => {
   );
 };
 
-export default LayoutMenu;
+export default BasicMenu;
