@@ -1,5 +1,6 @@
-import React, { ReactElement, ReactNode } from 'react';
-import { Layout, Avatar, Icon } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
+import React from 'react';
+import { Layout, Avatar } from 'antd';
 
 const { Header } = Layout;
 
@@ -18,7 +19,7 @@ const BasicHeader: React.FC = props => {
       >
         U
       </Avatar>
-      <Icon type="poweroff" className={styles['poweroff-icon']}></Icon>
+      <PoweroffOutlined className={styles['poweroff-icon']} />
     </Header>
   );
 };

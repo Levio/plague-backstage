@@ -1,5 +1,5 @@
-import React, { ReactElement, ReactNode } from 'react';
-import { Menu, Icon } from 'antd';
+import React, { ReactNode } from 'react';
+import { Menu } from 'antd';
 import MENUCONFIG, { MenuState } from '@/config/menu';
 
 const { SubMenu } = Menu;
@@ -13,7 +13,7 @@ const BasicMenu: React.FC = props => {
             key={item.key}
             title={
               <span>
-                {item.icon ? <Icon type={item.icon} /> : null}
+                {item.icon ? item.icon : null}
                 <span>{item.title}</span>
               </span>
             }
@@ -24,7 +24,7 @@ const BasicMenu: React.FC = props => {
       } else {
         return (
           <Menu.Item key={item.key}>
-            {item.icon ? <Icon type={item.icon} /> : null}
+            {item.icon ? item.icon : null}
             <span>{item.title}</span>
           </Menu.Item>
         );

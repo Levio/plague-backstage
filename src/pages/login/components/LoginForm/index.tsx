@@ -6,14 +6,18 @@ import { Tabs, Form } from 'antd';
 import LoginContext from './LoginContext';
 import LoginTab from './LoginTab';
 import LoginSubmit from './LoginSubmit';
+import LoginItems, { LoginItemProps } from './LoginItem';
+import { LoginParamsType } from '@/services/login';
 
 import styles from './index.less';
 
 interface LoginFormProps {
+  welcomeText?: string;
   activeKey?: string;
   onTabChange?: (key: string) => void;
   className?: string;
   children: React.ReactComponentElement<typeof LoginTab>[];
+  onSubmit?: (values: LoginParamsType) => void;
 }
 
 type LoginTabType = React.ReactComponentElement<typeof LoginTab>;
@@ -21,6 +25,8 @@ type LoginTabType = React.ReactComponentElement<typeof LoginTab>;
 interface LoginFormType extends React.FC<LoginFormProps> {
   Tab: typeof LoginTab;
   Submit: typeof LoginSubmit;
+  UserName: React.FC<LoginItemProps>;
+  Password: React.FC<LoginItemProps>;
 }
 
 const LoginForm: LoginFormType = props => {
@@ -56,7 +62,12 @@ const LoginForm: LoginFormType = props => {
       }}
     >
       <div className={classnames(className, styles.container)}>
-        <Form>
+        <div className={styles.welcome}>{props.welcomeText || '欢迎登录疫镜后台管理平台'}</div>
+        <Form
+          onFinish={values => {
+            props.onSubmit && props.onSubmit(values as LoginParamsType);
+          }}
+        >
           {/* 判断是否传入了tab */}
           {tab.length ? (
             <>
@@ -76,5 +87,7 @@ const LoginForm: LoginFormType = props => {
 
 LoginForm.Tab = LoginTab;
 LoginForm.Submit = LoginSubmit;
+LoginForm.UserName = LoginItems.UserName;
+LoginForm.Password = LoginItems.Password;
 
 export default LoginForm;

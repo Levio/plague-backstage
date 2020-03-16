@@ -8,7 +8,8 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "antd": "^3.19.5",
+    "@ant-design/icons": "^4.0.2",
+    "antd": "^4.0.3",
     "classnames": "^2.2.6",
     "dva": "^2.6.0-beta.6",
     "react": "^16.8.6",
