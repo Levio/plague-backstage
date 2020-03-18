@@ -6,7 +6,6 @@ import { login } from '@/services/login';
 
 export interface LoginStateType {
   status?: 'ok' | 'error';
-  currentAuthority?: 'admin' | 'user' | 'guest';
 }
 
 export interface LoginModelType {
@@ -25,15 +24,18 @@ const loginModel: LoginModelType = {
   namespace: 'login',
   state: {
     status: undefined,
-    currentAuthority: undefined,
   },
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(login, payload);
-      if (response.code === '200') {
+      if (response.code === '200' && response.data) {
         yield put({
           type: 'changeLoginStatus',
           payload: response.data,
+        });
+        yield put({
+          type: 'user/saveUser',
+          payload: response.data.user || {},
         });
         if (response.data.status === 'ok') {
           router.replace('/');
@@ -45,7 +47,6 @@ const loginModel: LoginModelType = {
         type: 'changeLoginStatus',
         payload: {
           status: undefined,
-          currentAuthority: undefined,
         },
       });
       router.push('/login');
@@ -56,6 +57,7 @@ const loginModel: LoginModelType = {
       return {
         ...state,
         status: payload.status,
+        currentAuthority: payload.currentAuthority,
       };
     },
   },

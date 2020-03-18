@@ -14,6 +14,7 @@ export interface MenuState {
   title: string;
   path: string;
   icon?: ReactNode;
+  authority?: ('admin' | 'user' | 'guest' | undefined)[];
   children?: MenuState[];
 }
 
@@ -25,29 +26,34 @@ const MENUCONFIG: MenuState[] = [
     key: 'user',
     title: '用户管理',
     path: '/user',
+    authority: ['admin', 'user'],
     icon: <UserOutlined />,
   },
   {
     key: 'tool',
     title: '疫情工具管理',
+    authority: ['admin', 'user'],
     path: '/tool',
     icon: <ToolOutlined />,
   },
   {
     key: 'track',
     title: '轨迹管理',
+    authority: ['admin', 'user'],
     path: '/track',
     icon: <CarOutlined />,
   },
   {
     key: 'rim',
     title: '周边疫情',
+    authority: ['admin', 'user'],
     path: '/rim',
     icon: <EnvironmentOutlined />,
   },
   {
     key: 'permission',
     title: '权限管理',
+    authority: ['admin'],
     path: '/permission',
     icon: <SettingOutlined />,
   },

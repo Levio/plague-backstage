@@ -42,9 +42,9 @@ const BasicHeader: React.FC<BasicHeaderProps> = props => {
           fontSize: 16,
         }}
       >
-        {userInfo.name ? userInfo.name.slice(0, 1) : '未'}
+        {userInfo.name ? userInfo.name.slice(0, 1).toUpperCase() : '游'}
       </Avatar>
-      <div className={styles.username}>{userInfo.name || '未知用户'}</div>
+      <div className={styles.username}>{userInfo.name || '游客'}</div>
       <PoweroffOutlined className={styles['poweroff-icon']} onClick={onLogout} />
     </Header>
   );

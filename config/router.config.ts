@@ -6,6 +6,7 @@ export default [
   },
   {
     path: '/',
+    authority: ['admin', 'user'],
     component: '../layouts/BasicLayout',
     routes: [{ path: '/', component: '../pages/index' }],
   },
