@@ -8,6 +8,13 @@ export default [
     path: '/',
     authority: ['admin', 'user'],
     component: '../layouts/BasicLayout',
-    routes: [{ path: '/', component: '../pages/index' }],
+    routes: [
+      { path: '/', redirect: '/user', component: '../pages/user' },
+      { path: '/user', component: '../pages/user' },
+      { component: '../pages/404' },
+    ],
+  },
+  {
+    component: '../pages/404',
   },
 ];

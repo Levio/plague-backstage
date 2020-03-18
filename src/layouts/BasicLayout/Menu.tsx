@@ -4,6 +4,7 @@ import MENUCONFIG, { MenuState } from '@/config/menu';
 import { connect } from 'dva';
 import { ConnectState } from '@/models/connect';
 import { UserStateType } from '@/models/user';
+import { router } from 'umi';
 
 const { SubMenu } = Menu;
 
@@ -37,7 +38,7 @@ const BasicMenu: React.FC<BasicMenuProps> = props => {
           );
         } else {
           return (
-            <Menu.Item key={item.key}>
+            <Menu.Item key={item.key} onClick={() => router.push(item.path)}>
               {item.icon ? item.icon : null}
               <span>{item.title}</span>
             </Menu.Item>

@@ -51,6 +51,10 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     );
   };
 
+  /*
+   * 判断是否已经登录
+   * 在刷新状态下更新回填user信息
+   */
   useEffect(() => {
     const { loginState = {} } = props;
     const { status } = loginState;
