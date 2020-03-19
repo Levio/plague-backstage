@@ -35,12 +35,12 @@ interface ResolveSelectProps {
  * @param props
  */
 const ResolveSelect: React.FC<ResolveSelectProps> = props => {
-  const { name, fetchOptions, itemProps, options } = props;
-  const [_options, setOptions] = useState<OptionsType[]>(options || []);
+  const { name, fetchOptions, itemProps, options: _options } = props;
+  const [options, setOptions] = useState<OptionsType[]>(_options || []);
 
   useEffect(() => {
     (async () => {
-      if (!options && fetchOptions) {
+      if (!_options && fetchOptions) {
         const { data = [] } = await fetchOptions();
         setOptions(data);
       }
@@ -50,7 +50,7 @@ const ResolveSelect: React.FC<ResolveSelectProps> = props => {
     // 由于自定义组件无法触发外层form的values变化，所以嵌套一层formItem
     <FormItem name={name}>
       <Select placeholder="请选择..." {...itemProps}>
-        {_options.map(option => {
+        {options.map(option => {
           return (
             <Select.Option key={option.key} value={option.key}>
               {option.value}
