@@ -30,6 +30,10 @@ interface ResolveSelectProps {
   fetchOptions?: FilterItemType['fetchOptions'];
 }
 
+/**
+ * 支持异步获取options的select
+ * @param props
+ */
 const ResolveSelect: React.FC<ResolveSelectProps> = props => {
   const { name, fetchOptions, itemProps, options } = props;
   const [_options, setOptions] = useState<OptionsType[]>(options || []);
@@ -59,7 +63,7 @@ const ResolveSelect: React.FC<ResolveSelectProps> = props => {
 };
 
 /**
- * 根据filter item data 返回 筛选表格选项
+ * 根据filter item data 返回筛选表格选项
  * @param data filter item data
  */
 const FilterFormItem: React.FC<FilterFormItemProps> = props => {
