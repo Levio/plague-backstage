@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
 
 import styles from './index.less';
@@ -11,13 +11,23 @@ import FilterFormItem from './FilterFormItem';
 interface FilterFormProps {
   className?: string;
   items?: FilterItemType[];
-  onSubmit?: (values: any) => void;
+  onSubmit?: (values: any) => Promise<any>;
 }
 
 const FilterForm: React.FC<FilterFormProps> = props => {
   const { className, items, onSubmit: onEmitSubmit } = props;
+  const [loading, setLoading] = useState<boolean>(false);
+
+  /**
+   * 筛选搜索按钮点击回调
+   * @param values 搜索参数
+   */
   const onsubmit = (values: any) => {
-    onEmitSubmit && onEmitSubmit(values);
+    setLoading(true);
+    onEmitSubmit &&
+      onEmitSubmit(values).then(() => {
+        setLoading(false);
+      });
   };
   return (
     <div className={classnames(className, styles.container)}>
@@ -28,7 +38,7 @@ const FilterForm: React.FC<FilterFormProps> = props => {
       <div className={styles.main}>
         <Form className={styles.form} onFinish={onsubmit}>
           <FilterFormItem data={items}></FilterFormItem>
-          <Button style={{ marginLeft: 'auto' }} type="primary" htmlType="submit">
+          <Button style={{ marginLeft: 'auto' }} type="primary" htmlType="submit" loading={loading}>
             查询
           </Button>
         </Form>

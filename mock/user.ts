@@ -76,20 +76,11 @@ export default {
       });
     }, 500);
   },
-  'GET /api/user/gender': (req: Request, res: Response) => {
+  'GET /api/user/filter': (req: Request, res: Response) => {
     setTimeout(() => {
       res.send({
         code: '200',
-        data: [
-          {
-            key: '0',
-            value: '男',
-          },
-          {
-            key: '1',
-            value: '女',
-          },
-        ],
+        data: [],
       });
     }, 500);
   },

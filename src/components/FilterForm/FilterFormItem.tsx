@@ -11,7 +11,11 @@ interface FilterFormItemProps {
 
 const FormItem = Form.Item;
 
-const formItemStyle = (flag: boolean) => ({
+/**
+ * 返回formitem 样式
+ * @param flag 是否为每行最后一个元素
+ */
+const formItemStyle = (flag: boolean): React.CSSProperties => ({
   minWidth: '33.3%',
   maxWidth: '33.3%',
   height: 32,

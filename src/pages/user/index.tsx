@@ -3,6 +3,7 @@ import FilterForm from '@/components/FilterForm';
 
 import styles from './index.less';
 import { FilterItemType } from '@/components/FilterForm/data';
+import { filterUser } from '@/services/user';
 
 const items: FilterItemType[] = [
   {
@@ -38,8 +39,17 @@ const items: FilterItemType[] = [
 ];
 
 const User: React.FC = props => {
-  const onSearch = (values: any) => {
-    console.log(values);
+  /**
+   * 筛选用户
+   * @param values
+   */
+  const onSearch = async (values: any) => {
+    try {
+      const { code, data } = await filterUser(values);
+      if (code === '200') {
+        console.log(data);
+      }
+    } catch (error) {}
   };
   return (
     <div className={styles.container}>
