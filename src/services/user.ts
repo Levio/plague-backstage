@@ -9,3 +9,7 @@ export function fetchUserInfo(params: FetchUserParamsType) {
     params,
   });
 }
+
+export function fetchGenderOptions() {
+  return request.get('/api/user/gender');
+}
