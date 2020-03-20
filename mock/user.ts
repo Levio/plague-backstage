@@ -1,4 +1,4 @@
-// import mockjs from 'mockjs';
+import mockjs from 'mockjs';
 import { Request, Response } from 'express';
 
 export default {
@@ -78,10 +78,25 @@ export default {
   },
   'GET /api/user/filter': (req: Request, res: Response) => {
     setTimeout(() => {
-      res.send({
-        code: '200',
-        data: [],
-      });
+      res.send(
+        mockjs.mock({
+          code: '200',
+          'data|6-15': [
+            {
+              username: '@ctitle(3)',
+              id: '@natural',
+              'gender|1': ['0', '1'],
+              'apartment|1': ['研发部', '人事部', '财务部', '工程部'],
+              registerTime: '@date("yyyy-MM-dd")',
+              trackNum: '@integer(1, 80)',
+              'isdanger|1': ['0', '1'],
+              dangerNum: '@integer(1, 100)',
+              articlePushNum: '@integer(0, 200)',
+              'status|1': ['0', '1'],
+            },
+          ],
+        }),
+      );
     }, 500);
   },
 };

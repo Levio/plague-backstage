@@ -31,6 +31,9 @@ const config: IConfig = {
         dynamicImport: false,
         title: 'BACKSTAGE',
         dll: false,
+        locale: {
+          default: 'zh-CN',
+        },
 
         routes: {
           exclude: [
