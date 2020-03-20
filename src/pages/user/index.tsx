@@ -7,7 +7,6 @@ import styles from './index.less';
 
 import { FilterItemType } from '@/components/FilterForm/data';
 import { ColumnsType } from 'antd/lib/table/interface';
-import { TableProps } from 'antd/lib/table';
 import { UserTableListItemType } from './data';
 
 const items: FilterItemType[] = [
@@ -68,6 +67,7 @@ const resolveRowClassNameFunc = (record: UserTableListItemType, index: number): 
 
 const User: React.FC = props => {
   const [datasource, setDatasource] = useState<object[]>([]);
+  const [tableScrollHeight, setTableScrollHeight] = useState<number>(500);
 
   const columns: ColumnsType<UserTableListItemType> = [
     {
@@ -134,20 +134,19 @@ const User: React.FC = props => {
   // 初始化表格数据
   useEffect(() => {
     onSearch({});
-    const height = document.querySelector('#scrollTable');
-    console.log(height && height.clientHeight);
+    const height = document.querySelector(`.${styles.table}`);
+    setTableScrollHeight((height as Element).clientHeight - 120 || 500);
   }, []);
 
   return (
     <div className={styles.container}>
       <FilterForm items={items} onSubmit={onSearch}></FilterForm>
       <Table
-        id="scrollTable"
         bordered
         rowKey="id"
         columns={columns}
         loading={loading}
-        scroll={{ y: 500 }}
+        scroll={{ y: tableScrollHeight }}
         dataSource={datasource}
         className={styles.table}
         rowClassName={resolveRowClassNameFunc}

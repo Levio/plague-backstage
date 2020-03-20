@@ -75,7 +75,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   }, []);
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ height: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div className={styles.logo}>{renderLogo()}</div>
         <BasicMenu></BasicMenu>
@@ -87,7 +87,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
             <Authoried authority={authority}>{props.children}</Authoried>
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>疫镜 &copy; 2020-03-09</Footer>
+        <Footer style={{ textAlign: 'center', padding: '12px 50px' }}>
+          疫镜 &copy; 2020-03-09
+        </Footer>
       </Layout>
     </Layout>
   );
