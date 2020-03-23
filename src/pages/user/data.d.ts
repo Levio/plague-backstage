@@ -1,4 +1,5 @@
 export interface UserTableListItemType {
+  id?: string | number;
   username?: string;
   gender?: '0' | '1';
   apartment?: string;

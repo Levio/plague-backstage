@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FilterForm from '@/components/FilterForm';
-import { Table, Tag } from 'antd';
+import { Table, Tag, Button, Modal } from 'antd';
 import { useFetchLoading } from '@/hooks';
 import { filterUser } from '@/services/user';
 import styles from './index.less';
@@ -8,7 +8,12 @@ import styles from './index.less';
 import { FilterItemType } from '@/components/FilterForm/data';
 import { ColumnsType } from 'antd/lib/table/interface';
 import { UserTableListItemType } from './data';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { router } from 'umi';
 
+/**
+ * 筛选条件配置items
+ */
 const items: FilterItemType[] = [
   {
     type: 'input',
@@ -58,6 +63,11 @@ const sortNumFunc = (
   return prev - next;
 };
 
+/**
+ * 行样式函数, 对于危险用户用红色标出
+ * @param record
+ * @param index
+ */
 const resolveRowClassNameFunc = (record: UserTableListItemType, index: number): string => {
   if (record.isdanger === '1') {
     return styles['danger-row'];
@@ -68,6 +78,36 @@ const resolveRowClassNameFunc = (record: UserTableListItemType, index: number): 
 const User: React.FC = props => {
   const [datasource, setDatasource] = useState<object[]>([]);
   const [tableScrollHeight, setTableScrollHeight] = useState<number>(500);
+
+  /**
+   * 查看表格内容详情
+   * @param record
+   */
+  const onViewTableItemClick = (record: UserTableListItemType) => {
+    console.log(record);
+    router.push(`/user/user_detail/${record.id}`);
+  };
+
+  /**
+   * 删除表格内容
+   * @param record
+   */
+  const onDeleteTableItemClick = (record: UserTableListItemType) => {
+    Modal.confirm({
+      title: '操作警告',
+      icon: <ExclamationCircleOutlined />,
+      content: (
+        <>
+          确认删除用户 <span style={{ fontWeight: 'bold' }}>{record.username}</span> 吗？
+        </>
+      ),
+      okText: '确认',
+      cancelText: '取消',
+      onOk() {
+        console.log(record);
+      },
+    });
+  };
 
   const columns: ColumnsType<UserTableListItemType> = [
     {
@@ -113,6 +153,32 @@ const User: React.FC = props => {
       title: '状态',
       render(value) {
         return value === '0' ? <Tag color="magenta">禁用</Tag> : <Tag color="green">正常</Tag>;
+      },
+    },
+    {
+      dataIndex: 'cus-options',
+      title: '操作',
+      render(value, record) {
+        return (
+          <>
+            <Button
+              style={{ fontSize: 12, marginRight: 15 }}
+              type="primary"
+              size="small"
+              onClick={() => onViewTableItemClick(record)}
+            >
+              查看
+            </Button>
+            <Button
+              style={{ fontSize: 12 }}
+              type="danger"
+              size="small"
+              onClick={() => onDeleteTableItemClick(record)}
+            >
+              删除
+            </Button>
+          </>
+        );
       },
     },
   ];
