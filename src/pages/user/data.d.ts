@@ -1,3 +1,4 @@
+import { extend } from 'umi-request';
 export interface UserTableListItemType {
   id?: string | number;
   username?: string;
@@ -8,5 +9,10 @@ export interface UserTableListItemType {
   isdanger?: '0' | '1';
   dangerNum?: number;
   articlePushNum?: number;
+  phone?: string | number;
   status?: '0' | '1';
+}
+
+export interface UserDetailType extends UserTableListItemType {
+  avatar?: string;
 }

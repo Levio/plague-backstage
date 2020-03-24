@@ -40,11 +40,11 @@ const items: FilterItemType[] = [
       },
     ],
   },
-  {
-    type: 'switch',
-    name: 'type',
-    label: '是否存活',
-  },
+  // {
+  //   type: 'switch',
+  //   name: 'type',
+  //   label: '是否存活',
+  // },
 ];
 
 /**

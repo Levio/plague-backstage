@@ -99,4 +99,25 @@ export default {
       );
     }, 500);
   },
+  'GET /api/user/detail': (req: Request, res: Response) => {
+    setTimeout(() => {
+      res.send(
+        mockjs.mock({
+          code: '200',
+          data: {
+            username: '@ctitle(3)',
+            id: req.query.id,
+            'gender|1': ['0', '1'],
+            'apartment|1': ['研发部', '人事部', '财务部', '工程部'],
+            registerTime: '@date("yyyy-MM-dd")',
+            trackNum: '@integer(1, 80)',
+            'isdanger|1': ['0', '1'],
+            dangerNum: '@integer(1, 100)',
+            articlePushNum: '@integer(0, 200)',
+            'status|1': ['0', '1'],
+          },
+        }),
+      );
+    }, 500);
+  },
 };

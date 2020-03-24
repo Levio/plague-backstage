@@ -1,5 +1,5 @@
 import React, { useState, ReactNode, useEffect } from 'react';
-import { Layout } from 'antd';
+import { Layout, Button } from 'antd';
 
 import styles from './index.less';
 
@@ -14,6 +14,7 @@ import { ConnectState } from '@/models/connect';
 import { LOCAL_USERINFO_KEY } from '@/config/const';
 import { router } from 'umi';
 import { LoginStateType } from '@/models/login';
+import { RollbackOutlined, SyncOutlined } from '@ant-design/icons';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -84,7 +85,30 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         <BasicHeader></BasicHeader>
         <Content style={{ margin: '0 16px' }}>
           <div className={styles.main}>
-            <Authoried authority={authority}>{props.children}</Authoried>
+            <div className={styles['option-box']}>
+              <Button
+                size="small"
+                icon={<RollbackOutlined />}
+                style={{ marginRight: 20 }}
+                onClick={() => {
+                  router.goBack();
+                }}
+              >
+                返回
+              </Button>
+              <Button
+                size="small"
+                icon={<SyncOutlined />}
+                onClick={() => {
+                  router.go(0);
+                }}
+              >
+                刷新
+              </Button>
+            </div>
+            <div className={styles['main-container']}>
+              <Authoried authority={authority}>{props.children}</Authoried>
+            </div>
           </div>
         </Content>
         <Footer style={{ textAlign: 'center', padding: '12px 50px' }}>
