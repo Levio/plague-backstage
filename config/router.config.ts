@@ -11,7 +11,7 @@ export default [
     routes: [
       { path: '/', redirect: '/user', component: '../pages/user' },
       { path: '/user', component: '../pages/user' },
-      { path: '/user/user_detail/:id', component: '../pages/user/user_detail' },
+      { path: '/user/user_detail/:id', component: '../pages/user_detail' },
       { component: '../pages/404' },
     ],
   },

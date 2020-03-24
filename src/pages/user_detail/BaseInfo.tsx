@@ -1,10 +1,10 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 
-import styles from './index.less';
+import styles from './baseInfo.less';
 import { TagOutlined } from '@ant-design/icons';
 import { Descriptions, Switch } from 'antd';
 import { fetchUserDetail } from '@/services/user';
-import { UserDetailType } from '../data';
+import { UserDetailType } from '../user/data';
 import EasyImage from '@/components/EasyImage';
 
 interface BaseInfoProps {

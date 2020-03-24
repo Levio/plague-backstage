@@ -16,7 +16,6 @@ const UserDetail: React.FC<UserDetailProps> = props => {
 
   return (
     <div className={styles.container}>
-      <div>user: {userId} detail</div>
       <BaseInfo id={userId || ''}></BaseInfo>
     </div>
   );
