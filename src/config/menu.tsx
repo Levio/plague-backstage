@@ -29,23 +29,6 @@ const MENUCONFIG: MenuState[] = [
     path: '/user',
     authority: ['admin', 'user'],
     icon: <UserOutlined />,
-    children: [
-      {
-        key: 'user1',
-        title: '用户管理',
-        path: '/user1',
-        authority: ['admin', 'user'],
-        icon: <UserOutlined />,
-      },
-      {
-        key: 'user2',
-        title: '用户管理',
-        path: '/user2',
-        parentKeys: ['user'],
-        authority: ['admin', 'user'],
-        icon: <UserOutlined />,
-      },
-    ],
   },
   {
     key: 'tool',

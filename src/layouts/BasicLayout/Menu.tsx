@@ -13,18 +13,19 @@ interface BasicMenuProps {
   userState?: UserStateType;
 }
 
-const findOpenOrSelectKeys = (
-  menuTag: string,
-  source: MenuState[] = [],
-  res?: string[],
-): void | string[] => {
-  for (const item of source) {
-    if (item.key === menuTag) {
-      res = item.parentKeys || [];
-    } else if (item.children) {
-      findOpenOrSelectKeys(menuTag, item.children, res);
+const findOpenOrSelectKeys = (menuTag: string, source: MenuState[] = []): void | string[] => {
+  let temp: string[] = [];
+  const tempFunc = (menuTag: string, source: MenuState[] = []): void | string[] => {
+    for (const item of source) {
+      if (item.key === menuTag) {
+        temp = item.parentKeys || [];
+      } else if (item.children) {
+        tempFunc(menuTag, item.children);
+      }
     }
-  }
+  };
+  tempFunc(menuTag, source);
+  return temp;
 };
 
 const BasicMenu: React.FC<BasicMenuProps> = props => {
@@ -37,13 +38,15 @@ const BasicMenu: React.FC<BasicMenuProps> = props => {
     setSelectedKeys([menu.key]);
   };
 
+  const onOpenChange = (openKeys: string[]) => {
+    setOpenKeys(openKeys);
+  };
+
   useEffect(() => {
     const pathname = window.location.pathname;
     const menuTag = pathname.split('/')[1];
-    const a: string[] = [];
-    findOpenOrSelectKeys(menuTag, MENUCONFIG, a);
-    console.log(a);
-    // setOpenKeys(findOpenOrSelectKeys(menuTag, MENUCONFIG) || []);
+    setOpenKeys(findOpenOrSelectKeys(menuTag, MENUCONFIG) || []);
+    setSelectedKeys([menuTag]);
   }, []);
 
   const resolveMenu = (menu: MenuState[]): ReactNode => {
@@ -86,6 +89,7 @@ const BasicMenu: React.FC<BasicMenuProps> = props => {
       defaultSelectedKeys={['user']}
       mode="inline"
       openKeys={openKeys}
+      onOpenChange={onOpenChange}
       selectedKeys={selectedKeys}
       onSelect={onSelect}
     >
