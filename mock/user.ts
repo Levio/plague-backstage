@@ -105,16 +105,59 @@ export default {
         mockjs.mock({
           code: '200',
           data: {
-            username: '@ctitle(3)',
-            id: req.query.id,
-            'gender|1': ['0', '1'],
-            'apartment|1': ['研发部', '人事部', '财务部', '工程部'],
-            registerTime: '@date("yyyy-MM-dd")',
-            trackNum: '@integer(1, 80)',
-            'isdanger|1': ['0', '1'],
-            dangerNum: '@integer(1, 100)',
-            articlePushNum: '@integer(0, 200)',
-            'status|1': ['0', '1'],
+            baseInfo: {
+              username: '@ctitle(3)',
+              id: req.query.id,
+              'gender|1': ['0', '1'],
+              'apartment|1': ['研发部', '人事部', '财务部', '工程部'],
+              registerTime: '@date("yyyy-MM-dd")',
+              trackNum: '@integer(1, 80)',
+              'isdanger|1': ['0', '1'],
+              dangerNum: '@integer(1, 100)',
+              articlePushNum: '@integer(0, 200)',
+              'status|1': ['0', '1'],
+            },
+            'articleInfo|4-14': [
+              {
+                time: '@date("yyyy-MM-dd HH:mm:ss")',
+                content: '@ctitle(10)',
+                url: 'www.baidu.com',
+                'status|1': ['0', '1'],
+              },
+            ],
+            dataInfo: {
+              'region|5-15': [
+                {
+                  id: '@natural',
+                  province: '@province',
+                  city: '@city',
+                  district: '@county',
+                  address: ['研发部', '人事部', '财务部', '工程部'],
+                  'isdanger|1': ['0', '1'],
+                },
+              ],
+              'track|5-15': [
+                {
+                  id: '@natural',
+                  time: '@ctitle(3)',
+                  from: '@city',
+                  to: '@city',
+                  no: '@ctitle(3)',
+                  'isdanger|1': ['0', '1'],
+                },
+              ],
+              'commuting|5-15': [
+                {
+                  id: '@natural',
+                  province: '@province',
+                  city: '@city',
+                  district: '@county',
+                  'tool|1': ['地铁', '公交', '自驾', '出租车'],
+                  startTime: '@time("HH:mm:ss")',
+                  endTime: '@time("HH:mm:ss")',
+                },
+              ],
+            },
           },
         }),
       );

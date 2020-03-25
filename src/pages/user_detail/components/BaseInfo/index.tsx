@@ -1,44 +1,22 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React from 'react';
 
-import styles from './baseInfo.less';
-import { TagOutlined } from '@ant-design/icons';
+import styles from './index.less';
 import { Descriptions, Switch } from 'antd';
-import { fetchUserDetail } from '@/services/user';
-import { UserDetailType } from '../user/data';
 import EasyImage from '@/components/EasyImage';
+import Title from '../Title';
+import { BaseInfoType } from '../../index';
 
 interface BaseInfoProps {
-  id: string | number;
+  data: BaseInfoType;
 }
 
 const BaseInfo: React.FC<BaseInfoProps> = props => {
-  const { id: userId } = props;
-  const [userDetail, setUserDetail] = useState<UserDetailType>({});
-
-  const renderTitle = (title: string): ReactNode => {
-    return (
-      <div className={styles['title-text-box']}>
-        <TagOutlined style={{ fontSize: 18, color: '#4c7ff7', marginRight: 10 }} />
-        <span className={styles['title-text']}>{title}</span>
-      </div>
-    );
-  };
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { code, data } = await fetchUserDetail({ id: userId || '' });
-        if (code === '200') {
-          setUserDetail(data);
-        }
-      } catch (error) {}
-    })();
-  }, []);
+  const { data: userDetail } = props;
 
   return (
     <div className={styles.container}>
       <div className={styles['base-info']}>
-        <div className={styles.title}>{renderTitle('基本信息')}</div>
+        <Title title="基本信息"></Title>
         <div className={styles.main}>
           <div className={styles['user-left-box']}>
             <EasyImage className={styles['user-avatar']} src={userDetail.avatar || ''}></EasyImage>

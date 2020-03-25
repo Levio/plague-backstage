@@ -12,7 +12,3 @@ export interface UserTableListItemType {
   phone?: string | number;
   status?: '0' | '1';
 }
-
-export interface UserDetailType extends UserTableListItemType {
-  avatar?: string;
-}
